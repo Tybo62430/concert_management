@@ -19,3 +19,7 @@ DATABASE_URL="mysql:// **user**:**password**@127.0.0.1:3306/**concertmanagement*
 ## Si vous voulez générer de fausses données :
 
 `bin/console doctrine:fixtures:load`
+
+## Lancer le server de test :
+
+Avec le CLI `symfony server:start`
