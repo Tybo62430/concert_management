@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil
+{% endblock %}
+
+{% block body %}
+	<style></style>
+	<div class="card mt-4">
+		<div class="card-body">
+			<h5 class="card-title">Rechercher un concert :</h5>
+			{{ form_start(eventSearchForm) }}
+			<div class="row row-cols-1 row-cols-md-5 g-4">
+				<div class="col">
+					{{form_row(eventSearchForm.city)}}
+				</div>
+				<div class="col">
+					{{form_row(eventSearchForm.artist)}}
+				</div>
+				<div class="col">
+					{{form_row(eventSearchForm.dateStart)}}
+
+				</div>
+				<div class="col">
+					{{form_row(eventSearchForm.dateEnd)}}
+				</div>
+				<div class="col d-flex align-items-end">
+					<div class="mb-3 ">
+						<button class="btn btn-primary me-1">Rechercher</button>
+						<a class="btn btn-danger" href="{{path('home')}}">
+							Reset
+						</a>
+					</div>
+
+				</div>
+			</div>
+			{{ form_end(eventSearchForm) }}
+		</div>
+	</div>
+	<div class="alert alert-secondary mt-4" role="alert">
+		{{title}}
+	</div>
+	<div class="table-responsive mt-4">
+		<div>
+			<table class="table table-striped table-hover table-bordered">
+				<thead class="table-primary">
+					<tr>
+						<th scope="col">Où</th>
+						<th scope="col">Quand</th>
+						<th scope="col">Qui</th>
+					</tr>
+				</thead>
+				<tbody class="table-group-divider">
+					{% for event in events %}
+						<tr>
+							<th scope="row">{{event.city.name}}</th>
+							<td>{{event.date |date("d/m/Y")}}</td>
+							<td>{{event.artist.name}}</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="3">
+								<h4 class="text-center">Aucun concert trouvé</h4>
+							</td>
+						</tr>
+					{% endfor %}
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}

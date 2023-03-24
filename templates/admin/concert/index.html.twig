@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gestion des concerts
+{% endblock %}
+
+{% block body %}
+	<div class="card my-4">
+		<div class="card-body">
+			<h5 class="card-title">Nouveau concert :</h5>
+			{{ include('admin/concert/_form.html.twig') }}
+		</div>
+	</div>
+
+
+	<div class="alert alert-secondary mt-4" role="alert">
+		Gestion des concerts:
+	</div>
+
+	<table class="table table-striped table-hover table-bordered">
+		<thead class="table-primary">
+			<tr>
+				<th scope="col">Où</th>
+				<th scope="col">Quand</th>
+				<th scope="col">Qui</th>
+				<th>actions</th>
+
+			</tr>
+		</thead>
+		<tbody class="table-group-divider">
+			{% for event in events %}
+				<tr>
+					<th scope="row">{{event.city.name}}</th>
+					<td>{{event.date |date("d/m/Y")}}</td>
+					<td>{{event.artist.name}}</td>
+					<td>
+						<div class="d-flex justify-content-around">
+							<a class="btn btn-sm btn-primary" href="{{ path('admin_concert_edit', {'id': event.id}) }}">
+								<i class="fas fa-edit"></i>
+							</a>
+							{{ include('admin/concert/_delete_form.html.twig') }}
+						</div>
+
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="3">
+						<h4 class="text-center">Aucun concert trouvé</h4>
+					</td>
+				</tr>
+			{% endfor %}
+
+		</tbody>
+	</table>
+
+	<a href="{{ path('admin_concert_new') }}">Create new</a>
+{% endblock %}

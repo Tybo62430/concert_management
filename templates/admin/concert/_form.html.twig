@@ -1,0 +1,18 @@
+{{ form_start(form) }}
+<div class="row row-cols-1 row-cols-md-5 g-4">
+	<div class="col">
+		{{form_row(form.city)}}
+	</div>
+	<div class="col">
+		{{form_row(form.artist)}}
+	</div>
+	<div class="col">
+		{{form_row(form.date)}}
+	</div>
+	<div class="col d-flex align-items-end">
+		<div class="mb-3 ">
+			<button class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+		</div>
+	</div>
+</div>
+{{ form_end(form) }}
